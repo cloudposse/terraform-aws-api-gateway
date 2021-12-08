@@ -5,5 +5,5 @@ output "created_date" {
 
 output "invoke_url" {
   description = "The URL to invoke the REST API"
-  value = module.example.invoke_url
+  value       = module.example.invoke_url
 }

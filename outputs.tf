@@ -29,5 +29,5 @@ output "arn" {
 
 output "invoke_url" {
   description = "The URL to invoke the REST API"
-  value = module.this.enabled ? aws_api_gateway_stage.this[0].invoke_url : null
+  value       = module.this.enabled ? aws_api_gateway_stage.this[0].invoke_url : null
 }
