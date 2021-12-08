@@ -69,5 +69,5 @@ func TestExamplesAccountSettingsDisabled(t *testing.T) {
 	terraform.Init(t, terraformOptions)
 	plan := terraform.Plan(t, terraformOptions)
 
-	assert.Contains(t, plan, "No changes. Infrastructure is up-to-date")
+	assert.Contains(t, plan, "No changes.")
 }

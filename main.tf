@@ -44,6 +44,7 @@ resource "aws_api_gateway_stage" "this" {
 
 # Set the logging, metrics and tracing levels for all methods
 resource "aws_api_gateway_method_settings" "all" {
+  count       = module.this.enabled ? 1 : 0
   rest_api_id = aws_api_gateway_rest_api.this[0].id
   stage_name  = aws_api_gateway_stage.this[0].stage_name
   method_path = "*/*"
