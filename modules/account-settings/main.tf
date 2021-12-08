@@ -9,10 +9,20 @@ resource "aws_api_gateway_account" "this" {
   cloudwatch_role_arn = aws_iam_role.api_gateway_cloudwatch[0].arn
 }
 
+module "iam_role_label" {
+  source  = "cloudposse/label/null"
+  version = "0.25.0"
+
+  attributes = ["api", "gateway", "cloudwatch"]
+
+  context = module.this.context
+}
+
 resource "aws_iam_role" "api_gateway_cloudwatch" {
   count              = local.create_iam_role ? 1 : 0
-  name               = "api_gateway_cloudwatch_global"
+  name               = module.iam_role_label.id
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
+  tags               = module.this.tags
 }
 
 data "aws_iam_policy_document" "assume_role_policy" {
