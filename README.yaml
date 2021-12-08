@@ -45,7 +45,10 @@ related:
 description: |-
   Terraform module to provision API Gatway resources.
 
-  The module consists of the following submodules:
+  The root module creates an API Gateway [REST API](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-rest-api.html) 
+  along with configuring tracing, logging, and metrics.
+
+  The module also consists of the following submodules:
 
     - [account-settings](modules/account-settings) - to provision account-level settings for logging and metrics for API Gateway
     ```
@@ -54,7 +57,9 @@ description: |-
 
 references:
   - name: "API Gateway CloudWatch Logging"
-    description: "To enable CloudWatch Logs, you must grant API Gateway permission to read and write logs to CloudWatch for your account."
+    description:
+      "To enable CloudWatch Logs, you must grant API Gateway permission to read and write logs to CloudWatch for your
+      account."
     url: "https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-logging.html"
 
   - name: "Create a monitor"
