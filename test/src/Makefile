@@ -28,4 +28,4 @@ docker/test:
 ## Clean up files
 clean:
 	rm -rf ../../examples/account-settings/*.tfstate*
-	rm -rf ../../examples/rest-api/*.tfstate*
+	rm -rf ../../examples/complete/*.tfstate*

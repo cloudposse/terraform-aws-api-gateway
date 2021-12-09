@@ -13,7 +13,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// Test the Terraform module in examples/rest-api using Terratest.
+// Test the Terraform module in examples/complete using Terratest.
 func TestExamplesRESTApi(t *testing.T) {
 	t.Parallel()
 
@@ -23,7 +23,7 @@ func TestExamplesRESTApi(t *testing.T) {
 
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		// The path to where our Terraform code is located
-		TerraformDir: "../../examples/rest-api",
+		TerraformDir: "../../examples/complete",
 		Upgrade:      true,
 		// Variables to pass to our Terraform code using -var-file options
 		VarFiles: []string{"fixtures.us-east-2.tfvars"},
@@ -63,7 +63,7 @@ func TestExamplesRESTApi(t *testing.T) {
 	})
 }
 
-// Test the Terraform module in examples/rest-api doesn't attempt to create resources with enabled=false.
+// Test the Terraform module in examples/complete doesn't attempt to create resources with enabled=false.
 func TestExamplesRESTApiDisabled(t *testing.T) {
-	testNoChanges(t, "../../examples/rest-api")
+	testNoChanges(t, "../../examples/complete")
 }
