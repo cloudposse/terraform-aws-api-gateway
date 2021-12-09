@@ -2,7 +2,7 @@ provider "aws" {
   region = var.region
 }
 
-module "example" {
+module "api_gateway" {
   source = "../../"
 
   openapi_config = {

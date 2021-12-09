@@ -1,5 +1,5 @@
 output "role_arn" {
   description = "ARN of the created role"
-  value       = module.example.role_arn
+  value       = module.account_settings.role_arn
 }
 

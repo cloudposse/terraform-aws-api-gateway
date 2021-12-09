@@ -13,7 +13,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// Test the Terraform module in examples/account-settings using Terratest.
+// Test the Terraform module in examples/rest-api using Terratest.
 func TestExamplesRESTApi(t *testing.T) {
 	t.Parallel()
 
@@ -63,7 +63,7 @@ func TestExamplesRESTApi(t *testing.T) {
 	})
 }
 
-// Test the Terraform module in examples/account-settings doesn't attenmpt to create resources with enabled=false.
+// Test the Terraform module in examples/rest-api doesn't attenmpt to create resources with enabled=false.
 func TestExamplesRESTApiDisabled(t *testing.T) {
 	t.Parallel()
 
