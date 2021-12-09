@@ -29,8 +29,8 @@ github_repo: cloudposse/terraform-aws-api-gateway
 # Badges to display
 badges:
   - name: "Latest Release"
-    image: "https://img.shields.io/github/release/cloudposse/terraform-api-gateway-platform.svg"
-    url: "https://github.com/cloudposse/terraform-api-gateway-platform/releases/latest"
+    image: "https://img.shields.io/github/release/cloudposse/terraform-api-gateway.svg"
+    url: "https://github.com/cloudposse/terraform-api-gateway/releases/latest"
   - name: "Slack Community"
     image: "https://slack.cloudposse.com/badge.svg"
     url: "https://slack.cloudposse.com"
