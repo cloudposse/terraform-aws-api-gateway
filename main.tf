@@ -1,6 +1,6 @@
 locals {
-  enabled = module.this.enabled
-  create_rest_api_policy = local.enabled && var.rest_api_policy!=null
+  enabled                = module.this.enabled
+  create_rest_api_policy = local.enabled && var.rest_api_policy != null
 }
 
 resource "aws_api_gateway_rest_api" "this" {
