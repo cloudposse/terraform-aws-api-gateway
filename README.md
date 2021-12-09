@@ -36,7 +36,6 @@ along with configuring tracing, logging, and metrics.
 The module also consists of the following submodules:
 
   - [account-settings](modules/account-settings) - to provision account-level settings for logging and metrics for API Gateway
-  ```
 
 ---
 
@@ -66,6 +65,10 @@ We literally have [*hundreds of terraform modules*][terraform_modules] that are 
 
 
 
+
+## Introduction
+
+A set of modules for configuring an API Gateway
 
 
 ## Security & Compliance [<img src="https://cloudposse.com/wp-content/uploads/2020/11/bridgecrew.svg" width="250" align="right" />](https://bridgecrew.io/)
