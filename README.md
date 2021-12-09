@@ -36,7 +36,6 @@ along with configuring tracing, logging, and metrics.
 The module also consists of the following submodules:
 
   - [account-settings](modules/account-settings) - to provision account-level settings for logging and metrics for API Gateway
-  ```
 
 ---
 
