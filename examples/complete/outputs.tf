@@ -1,14 +1,9 @@
-output "id" {
-  description = "ID of the created example"
-  value       = module.example.id
+output "created_date" {
+  description = "The date the REST API was created"
+  value       = module.api_gateway.created_date
 }
 
-output "example" {
-  description = "Output \"example\" from example module"
-  value       = module.example.example
-}
-
-output "random" {
-  description = "Output \"random\" from example module"
-  value       = module.example.random
+output "invoke_url" {
+  description = "The URL to invoke the REST API"
+  value       = module.api_gateway.invoke_url
 }

@@ -43,3 +43,8 @@ func TestExamplesAccountSettings(t *testing.T) {
 	// Ensure we get a random number appended
 	assert.NotNil(t, role_arn)
 }
+
+// Test the Terraform module in examples/account-settings doesn't attempt to create resources with enabled=false.
+func TestExamplesAccountSettingsDisabled(t *testing.T) {
+	testNoChanges(t, "../../examples/account-settings")
+}
