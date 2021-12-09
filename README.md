@@ -1,6 +1,6 @@
 
 <!-- markdownlint-disable -->
-# terraform-aws-api-gateway [![Latest Release](https://img.shields.io/github/release/cloudposse/terraform-api-gateway-platform.svg)](https://github.com/cloudposse/terraform-api-gateway-platform/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
+# terraform-aws-api-gateway [![Latest Release](https://img.shields.io/github/release/cloudposse/terraform-api-gateway.svg)](https://github.com/cloudposse/terraform-api-gateway/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
 <!-- markdownlint-restore -->
 
 [![README Header][readme_header_img]][readme_header_link]
