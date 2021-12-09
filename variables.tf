@@ -1,6 +1,9 @@
+# See https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html for additional 
+# configuration information.
 variable "openapi_config" {
-  type    = any
-  default = {}
+  description = "The OpenAPI specification for the API"
+  type        = any
+  default     = {}
 }
 
 variable "endpoint_type" {
@@ -35,6 +38,8 @@ variable "xray_tracing_enabled" {
   default     = false
 }
 
+# See https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-logging.html for additional information
+# on how to configure logging.
 variable "access_log_format" {
   description = "The format of the access log file."
   type        = string
