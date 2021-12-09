@@ -14,7 +14,7 @@ import (
 )
 
 // Test the Terraform module in examples/complete using Terratest.
-func TestExamplesRESTApi(t *testing.T) {
+func TestExamplesComplete(t *testing.T) {
 	t.Parallel()
 
 	rand.Seed(time.Now().UnixNano())
@@ -64,6 +64,6 @@ func TestExamplesRESTApi(t *testing.T) {
 }
 
 // Test the Terraform module in examples/complete doesn't attempt to create resources with enabled=false.
-func TestExamplesRESTApiDisabled(t *testing.T) {
+func TestExamplesCompleteDisabled(t *testing.T) {
 	testNoChanges(t, "../../examples/complete")
 }
