@@ -1,5 +1,6 @@
 locals {
   enabled = module.this.enabled
+  create_rest_api_policy = local.enabled && var.rest_api_policy!=null
 }
 
 resource "aws_api_gateway_rest_api" "this" {
@@ -12,6 +13,13 @@ resource "aws_api_gateway_rest_api" "this" {
   endpoint_configuration {
     types = [var.endpoint_type]
   }
+}
+
+resource "aws_api_gateway_rest_api_policy" "this" {
+  count       = local.create_rest_api_policy ? 1 : 0
+  rest_api_id = aws_api_gateway_rest_api.this[0].id
+
+  policy = var.rest_api_policy
 }
 
 resource "aws_cloudwatch_log_group" "this" {
