@@ -24,5 +24,6 @@ module "api_gateway" {
       }
     }
   }
-  context = module.this.context
+  logging_level = var.logging_level
+  context       = module.this.context
 }
