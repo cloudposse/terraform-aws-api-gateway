@@ -63,7 +63,7 @@ func TestExamplesRESTApi(t *testing.T) {
 	})
 }
 
-// Test the Terraform module in examples/rest-api doesn't attenmpt to create resources with enabled=false.
+// Test the Terraform module in examples/rest-api doesn't attempt to create resources with enabled=false.
 func TestExamplesRESTApiDisabled(t *testing.T) {
 	t.Parallel()
 

@@ -44,7 +44,7 @@ func TestExamplesAccountSettings(t *testing.T) {
 	assert.NotNil(t, role_arn)
 }
 
-// Test the Terraform module in examples/account-settings doesn't attenmpt to create resources with enabled=false.
+// Test the Terraform module in examples/account-settings doesn't attempt to create resources with enabled=false.
 func TestExamplesAccountSettingsDisabled(t *testing.T) {
 	t.Parallel()
 
