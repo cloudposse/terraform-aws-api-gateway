@@ -19,7 +19,7 @@ output "execution_arn" {
     function, e.g., arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j, which can be concatenated with allowed stage, 
     method and resource path.The ARN of the Lambda function that will be executed.
     EOF
-  value       = module.this.enabled ? aws_api_gateway_rest_api.this[0].arn : null
+  value       = module.this.enabled ? aws_api_gateway_rest_api.this[0].execution_arn : null
 }
 
 output "arn" {
