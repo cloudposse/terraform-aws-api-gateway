@@ -51,7 +51,6 @@ description: |-
   The module also consists of the following submodules:
 
     - [account-settings](modules/account-settings) - to provision account-level settings for logging and metrics for API Gateway
-    ```
 
 introduction: |-
   A set of modules for configuring an API Gateway
