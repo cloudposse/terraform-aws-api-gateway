@@ -3,6 +3,7 @@ resource "aws_api_gateway_rest_api" "this" {
 
   name = module.this.id
   body = jsonencode(var.openapi_config)
+  tags = module.this.tags
 
   endpoint_configuration {
     types = [var.endpoint_type]
@@ -12,8 +13,7 @@ resource "aws_api_gateway_rest_api" "this" {
 resource "aws_cloudwatch_log_group" "this" {
   count = module.this.enabled ? 1 : 0
   name  = module.this.id
-
-  tags = module.this.tags
+  tags  = module.this.tags
 }
 
 resource "aws_api_gateway_deployment" "this" {
@@ -35,6 +35,7 @@ resource "aws_api_gateway_stage" "this" {
   rest_api_id          = aws_api_gateway_rest_api.this[0].id
   stage_name           = module.this.stage
   xray_tracing_enabled = var.xray_tracing_enabled
+  tags                 = module.this.tags
 
   access_log_settings {
     destination_arn = aws_cloudwatch_log_group.this[0].arn
