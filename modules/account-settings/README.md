@@ -11,7 +11,7 @@ Instead pin to the release tag (e.g. `?ref=tags/x.y.z`) of one of our [latest re
 
 For a complete example, see [examples/account-settings](../../examples/account-settings).
 
-For automated tests of the complete example using [bats](https://github.com/bats-core/bats-core) and [Terratest](https://github.com/gruntwork-io/terratest)(which tests and deploys the example on AWS), see [test](test).
+For automated tests of the complete example using [bats](https://github.com/bats-core/bats-core) and [Terratest](https://github.com/gruntwork-io/terratest)(which tests and deploys the example on AWS), see [test](../../test).
 
 ```hcl
 module "account_settings" {
