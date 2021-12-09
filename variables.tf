@@ -7,8 +7,9 @@ variable "openapi_config" {
 }
 
 variable "endpoint_type" {
-  type    = string
-  default = "REGIONAL"
+  type        = string
+  description = "The type of the endpoint. One of - PUBLIC, PRIVATE, REGIONAL"
+  default     = "REGIONAL"
 
   validation {
     condition     = contains(["EDGE", "REGIONAL", "PRIVATE"], var.endpoint_type)
@@ -17,8 +18,9 @@ variable "endpoint_type" {
 }
 
 variable "logging_level" {
-  type    = string
-  default = "INFO"
+  type        = string
+  description = "The logging level of the API. One of - OFF, INFO, ERROR"
+  default     = "INFO"
 
   validation {
     condition     = contains(["OFF", "INFO", "ERROR"], var.logging_level)
