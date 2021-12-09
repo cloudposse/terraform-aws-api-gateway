@@ -1,6 +1,8 @@
 locals {
   enabled                = module.this.enabled
   create_rest_api_policy = local.enabled && var.rest_api_policy != null
+  create_log_group       = local.enabled && var.logging_level != "OFF"
+  log_group_arn          = local.create_log_group ? module.cloudwatch_log_group.log_group_arn : null
 }
 
 resource "aws_api_gateway_rest_api" "this" {
@@ -22,10 +24,12 @@ resource "aws_api_gateway_rest_api_policy" "this" {
   policy = var.rest_api_policy
 }
 
-resource "aws_cloudwatch_log_group" "this" {
-  count = local.enabled ? 1 : 0
-  name  = module.this.id
-  tags  = module.this.tags
+module "cloudwatch_log_group" {
+  source  = "cloudposse/cloudwatch-logs/aws"
+  version = "0.6.2"
+
+  enabled = local.create_log_group
+  context = module.this.context
 }
 
 resource "aws_api_gateway_deployment" "this" {
@@ -49,9 +53,13 @@ resource "aws_api_gateway_stage" "this" {
   xray_tracing_enabled = var.xray_tracing_enabled
   tags                 = module.this.tags
 
-  access_log_settings {
-    destination_arn = aws_cloudwatch_log_group.this[0].arn
-    format          = replace(var.access_log_format, "\n", "")
+  dynamic "access_log_settings" {
+    for_each = local.create_log_group ? [1] : []
+
+    content {
+      destination_arn = local.log_group_arn
+      format          = replace(var.access_log_format, "\n", "")
+    }
   }
 }
 
