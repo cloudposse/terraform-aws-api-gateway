@@ -1,5 +1,9 @@
+locals {
+  enabled = module.this.enabled
+}
+
 resource "aws_api_gateway_rest_api" "this" {
-  count = module.this.enabled ? 1 : 0
+  count = local.enabled ? 1 : 0
 
   name = module.this.id
   body = jsonencode(var.openapi_config)
@@ -11,13 +15,13 @@ resource "aws_api_gateway_rest_api" "this" {
 }
 
 resource "aws_cloudwatch_log_group" "this" {
-  count = module.this.enabled ? 1 : 0
+  count = local.enabled ? 1 : 0
   name  = module.this.id
   tags  = module.this.tags
 }
 
 resource "aws_api_gateway_deployment" "this" {
-  count       = module.this.enabled ? 1 : 0
+  count       = local.enabled ? 1 : 0
   rest_api_id = aws_api_gateway_rest_api.this[0].id
 
   triggers = {
@@ -30,7 +34,7 @@ resource "aws_api_gateway_deployment" "this" {
 }
 
 resource "aws_api_gateway_stage" "this" {
-  count                = module.this.enabled ? 1 : 0
+  count                = local.enabled ? 1 : 0
   deployment_id        = aws_api_gateway_deployment.this[0].id
   rest_api_id          = aws_api_gateway_rest_api.this[0].id
   stage_name           = module.this.stage
@@ -45,7 +49,7 @@ resource "aws_api_gateway_stage" "this" {
 
 # Set the logging, metrics and tracing levels for all methods
 resource "aws_api_gateway_method_settings" "all" {
-  count       = module.this.enabled ? 1 : 0
+  count       = local.enabled ? 1 : 0
   rest_api_id = aws_api_gateway_rest_api.this[0].id
   stage_name  = aws_api_gateway_stage.this[0].stage_name
   method_path = "*/*"
