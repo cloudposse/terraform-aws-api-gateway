@@ -134,7 +134,7 @@ variable "api_key_source" {
   default     = null
 
   validation {
-    condition     = contains(["HEADER", "AUTHORIZER"], var.api_key_source)
+    condition     = var.api_key_source == null || contains(["HEADER", "AUTHORIZER"], var.api_key_source)
     error_message = "Valid values for var: logging_level are (HEADER, AUTHORIZER)."
   }
 }
