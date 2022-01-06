@@ -10,7 +10,6 @@ resource "aws_api_gateway_rest_api" "this" {
 
   name                         = module.this.id
   description                  = var.description
-  endpoint_configuration       = var.endpoint_configuration
   binary_media_types           = var.binary_media_types
   minimum_compression_size     = var.minimum_compression_size
   body                         = jsonencode(var.openapi_config)

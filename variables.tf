@@ -110,12 +110,6 @@ variable "description" {
   default     = null
 }
 
-variable "endpoint_configuration" {
-  description = "Configuration block defining API endpoint configuration including endpoint type. Defined below."
-  type        = map(any)
-  default     = null
-}
-
 variable "binary_media_types" {
   description = "List of binary media types supported by the REST API. By default, the REST API supports only UTF-8-encoded text payloads. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-binary-media-types extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value."
   type        = list(string)
