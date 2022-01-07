@@ -26,7 +26,7 @@ resource "aws_api_gateway_rest_api_policy" "this" {
 
 module "cloudwatch_log_group" {
   source  = "cloudposse/cloudwatch-logs/aws"
-  version = "0.6.2"
+  version = "0.6.3"
 
   enabled = local.create_log_group
   context = module.this.context
