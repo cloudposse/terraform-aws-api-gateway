@@ -1,4 +1,4 @@
-# See https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html for additional 
+# See https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html for additional
 # configuration information.
 variable "openapi_config" {
   description = "The OpenAPI specification for the API"
@@ -36,6 +36,12 @@ variable "metrics_enabled" {
 
 variable "xray_tracing_enabled" {
   description = "A flag to indicate whether to enable X-Ray tracing."
+  type        = bool
+  default     = false
+}
+
+variable "existing_api_gateway_rest_api" {
+  description = "A flag to use existing api gateway rest api to apply the aws_api_gateway_rest_api_policy.this resource against."
   type        = bool
   default     = false
 }

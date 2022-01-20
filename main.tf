@@ -19,7 +19,7 @@ resource "aws_api_gateway_rest_api" "this" {
 
 resource "aws_api_gateway_rest_api_policy" "this" {
   count       = local.create_rest_api_policy ? 1 : 0
-  rest_api_id = aws_api_gateway_rest_api.this[0].id
+  rest_api_id = var.existing_api_gateway_rest_api != "" ? var.existing_api_gateway_rest_api : aws_api_gateway_rest_api.this[0].id
 
   policy = var.rest_api_policy
 }
