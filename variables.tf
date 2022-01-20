@@ -19,7 +19,7 @@ variable "endpoint_type" {
 
 variable "logging_level" {
   type        = string
-  description = "The logging level of the API. One of - OFF, INFO, ERROR"
+  description = "The logging level of the API. One of f- OFF, INFO, ERROR"
   default     = "INFO"
 
   validation {
@@ -42,8 +42,8 @@ variable "xray_tracing_enabled" {
 
 variable "existing_api_gateway_rest_api" {
   description = "A flag to use existing api gateway rest api to apply the aws_api_gateway_rest_api_policy.this resource against."
-  type        = bool
-  default     = false
+  type        = string
+  default     = ""
 }
 
 # See https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-logging.html for additional information
@@ -82,28 +82,28 @@ variable "access_log_format" {
 # information on how to configure resource policies.
 #
 # Example:
-# {
-#    "Version": "2012-10-17",
-#    "Statement": [
-#        {
-#            "Effect": "Allow",
-#            "Principal": "*",
-#            "Action": "execute-api:Invoke",
-#            "Resource": "arn:aws:execute-api:us-east-1:000000000000:*"
-#        },
-#        {
-#            "Effect": "Deny",
-#            "Principal": "*",
-#            "Action": "execute-api:Invoke",
-#            "Resource": "arn:aws:execute-api:region:account-id:*",
-#            "Condition": {
-#                "NotIpAddress": {
-#                    "aws:SourceIp": "123.4.5.6/24"
-#                }
-#            }
-#        }
-#    ]
-#}
+{
+   "Version": "2012-10-17",
+   "Statement": [
+       {
+           "Effect": "Allow",
+           "Principal": "*",
+           "Action": "execute-api:Invoke",
+           "Resource": "arn:aws:execute-api:us-east-1:000000000000:*"
+       },
+       {
+           "Effect": "Deny",
+           "Principal": "*",
+           "Action": "execute-api:Invoke",
+           "Resource": "arn:aws:execute-api:region:account-id:*",
+           "Condition": {
+               "NotIpAddress": {
+                   "aws:SourceIp": "123.4.5.6/24"
+               }
+           }
+       }
+   ]
+}
 variable "rest_api_policy" {
   description = "The IAM policy document for the API."
   type        = string
