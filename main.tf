@@ -1,6 +1,6 @@
 locals {
   enabled                = module.this.enabled
-  create_rest_api_policy = local.enabled && var.rest_api_policy != null
+  create_rest_api_policy = local.enabled || var.existing_api_gateway_rest_api != "" && var.rest_api_policy != null
   create_log_group       = local.enabled && var.logging_level != "OFF"
   log_group_arn          = local.create_log_group ? module.cloudwatch_log_group.log_group_arn : null
 }
