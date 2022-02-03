@@ -210,6 +210,7 @@ Available targets:
 | <a name="output_id"></a> [id](#output\_id) | The ID of the REST API |
 | <a name="output_invoke_url"></a> [invoke\_url](#output\_invoke\_url) | The URL to invoke the REST API |
 | <a name="output_root_resource_id"></a> [root\_resource\_id](#output\_root\_resource\_id) | The resource ID of the REST API's root |
+| <a name="output_stage_arn"></a> [stage\_arn](#output\_stage\_arn) | The ARN of the gateway stage |
 <!-- markdownlint-restore -->
 
 
