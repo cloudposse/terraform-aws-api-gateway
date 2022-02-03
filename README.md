@@ -207,8 +207,8 @@ Available targets:
 | <a name="output_execution_arn"></a> [execution\_arn](#output\_execution\_arn) | The execution ARN part to be used in lambda\_permission's source\_arn when allowing API Gateway to invoke a Lambda <br>    function, e.g., arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j, which can be concatenated with allowed stage, <br>    method and resource path.The ARN of the Lambda function that will be executed. |
 | <a name="output_id"></a> [id](#output\_id) | The ID of the REST API |
 | <a name="output_invoke_url"></a> [invoke\_url](#output\_invoke\_url) | The URL to invoke the REST API |
-| <a name="output_stage_arn"></a> [stage\_arn](#output\_stage\_arn) | The ARN of the gateway stage |
 | <a name="output_root_resource_id"></a> [root\_resource\_id](#output\_root\_resource\_id) | The resource ID of the REST API's root |
+| <a name="output_stage_arn"></a> [stage\_arn](#output\_stage\_arn) | The ARN of the gateway stage |
 <!-- markdownlint-restore -->
 
 
@@ -311,7 +311,7 @@ In general, PRs are welcome. We follow the typical "fork-and-pull" Git workflow.
 
 ## Copyright
 
-Copyright © 2017-2021 [Cloud Posse, LLC](https://cpco.io/copyright)
+Copyright © 2017-2022 [Cloud Posse, LLC](https://cpco.io/copyright)
 
 
 
