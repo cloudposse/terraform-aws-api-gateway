@@ -26,8 +26,10 @@ resource "aws_api_gateway_rest_api_policy" "this" {
 }
 
 module "cloudwatch_log_group" {
-  source  = "cloudposse/cloudwatch-logs/aws"
-  version = "0.6.2"
+  # source  = "cloudposse/cloudwatch-logs/aws"
+  # version = "0.6.2"
+  source = "git::https://github.com/cloudposse/terraform-aws-cloudwatch-logs.git?ref=add_policy_boundary"
+  
 
   enabled = local.create_log_group
   context = module.this.context
