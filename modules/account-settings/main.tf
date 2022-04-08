@@ -46,7 +46,7 @@ module "role" {
   policy_document_count = 1
   policy_description    = "Allow API Gateway to send logs to CloudWatch IAM policy"
   role_description      = "Allow API Gateway to send logs to CloudWatch"
-  permission_boundary   = var.permission_boundary
+  permissions_boundary   = var.permissions_boundary
   role_tags_enabled     = var.role_tags_enabled
 
   context = module.this.context
