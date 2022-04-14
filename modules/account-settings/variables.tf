@@ -4,7 +4,7 @@ variable "iam_role_arn" {
   default     = null
 }
 
-variable "role_tags_enabled" {
+variable "iam_tags_enabled" {
   type        = string
   description = "Enable/disable tags on IAM roles"
   default     = true
