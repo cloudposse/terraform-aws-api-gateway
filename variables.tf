@@ -109,3 +109,15 @@ variable "private_link_target_arns" {
   description = "A list of target ARNs for VPC Private Link"
   default     = []
 }
+
+variable "iam_tags_enabled" {
+  type        = string
+  description = "Enable/disable tags on IAM roles and policies"
+  default     = true
+}
+
+variable "permissions_boundary" {
+  type        = string
+  default     = ""
+  description = "ARN of the policy that is used to set the permissions boundary for the IAM role"
+}
