@@ -28,7 +28,7 @@ data "aws_iam_policy_document" "api_gateway_permissions" {
 
 module "role" {
   source  = "cloudposse/iam-role/aws"
-  version = "0.16.1"
+  version = "0.16.2"
 
   enabled = local.create_iam_role
   #name         = module.iam_role_label.id
