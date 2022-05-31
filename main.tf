@@ -75,3 +75,19 @@ resource "aws_api_gateway_method_settings" "all" {
     logging_level   = var.logging_level
   }
 }
+
+
+resource "aws_api_gateway_gateway_response" "default" {
+  for_each      = length(var.gateway_responses) > 0 ? { for s in var.gateway_responses : s.status_code => s } : {}
+  api_id        = var.existing_api_gateway_rest_api != "" ? var.existing_api_gateway_rest_api : aws_api_gateway_rest_api.this[0].id
+  status_code   = each.value.status_code
+  response_type = each.value.response_type
+
+  response_templates = {
+    each.key.response_templates = each.value.response_templates
+  }
+
+  response_parameters = {
+    each.key.response_parameters = each.value.response_parameters
+  }
+}
