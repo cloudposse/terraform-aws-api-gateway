@@ -89,7 +89,7 @@ variable "gateway_responses" {
   type = list(object({
     response_type       = string
     status_code         = string
-    response_templates  = map(any)
-    response_parameters = map(any)
+    response_templates  = list(any)
+    response_parameters = list(any)
   }))
 }
