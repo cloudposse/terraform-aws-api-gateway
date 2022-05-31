@@ -82,6 +82,6 @@ resource "aws_api_gateway_gateway_response" "default" {
   rest_api_id         = var.existing_api_gateway_rest_api != "" ? var.existing_api_gateway_rest_api : aws_api_gateway_rest_api.this[0].id
   status_code         = each.value.status_code
   response_type       = each.value.response_type
-  response_templates  = length(each.value.response_templates) > 0 ? each.value.response_templates : {}
-  response_parameters = length(each.value.response_parameters) > 0 ? each.value.response_parameters : {}
+  response_templates  = length(each.value.response_templates) > 0 ? element(each.value.response_templates, 0) : {}
+  response_parameters = length(each.value.response_parameters) > 0 ? element(each.value.response_parameters, 0) : {}
 }
