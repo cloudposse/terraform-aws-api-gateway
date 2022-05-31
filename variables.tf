@@ -83,3 +83,13 @@ variable "rest_api_policy" {
   type        = string
   default     = null
 }
+
+variable "gateway_responses" {
+  description = "(Optional) - A list of objects that contain the API Gateway, Gateway Response for a REST API Gateway."
+  type = list(object({
+    response_type       = string
+    status_code         = string
+    response_templates  = list(any)
+    response_parameters = list(any)
+  }))
+}
