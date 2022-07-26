@@ -28,7 +28,7 @@ data "aws_iam_policy_document" "api_gateway_permissions" {
 
 module "role" {
   source  = "cloudposse/iam-role/aws"
-  version = "0.14.0"
+  version = "0.16.1"
 
   enabled = local.create_iam_role
   #name         = module.iam_role_label.id
@@ -46,6 +46,8 @@ module "role" {
   policy_document_count = 1
   policy_description    = "Allow API Gateway to send logs to CloudWatch IAM policy"
   role_description      = "Allow API Gateway to send logs to CloudWatch"
+  permissions_boundary  = var.permissions_boundary
+  tags_enabled          = var.iam_tags_enabled
 
   context = module.this.context
 }

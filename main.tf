@@ -3,6 +3,7 @@ locals {
   create_rest_api_policy = local.enabled || var.existing_api_gateway_rest_api != "" && var.rest_api_policy != null
   create_log_group       = local.enabled && var.logging_level != "OFF"
   log_group_arn          = local.create_log_group ? module.cloudwatch_log_group.log_group_arn : null
+  vpc_link_enabled       = local.enabled && length(var.private_link_target_arns) > 0
 }
 
 resource "aws_api_gateway_rest_api" "this" {
@@ -26,9 +27,12 @@ resource "aws_api_gateway_rest_api_policy" "this" {
 
 module "cloudwatch_log_group" {
   source  = "cloudposse/cloudwatch-logs/aws"
-  version = "0.6.2"
+  version = "0.6.5"
 
-  enabled = local.create_log_group
+  enabled              = local.create_log_group
+  iam_tags_enabled     = var.iam_tags_enabled
+  permissions_boundary = var.permissions_boundary
+
   context = module.this.context
 }
 
@@ -49,9 +53,13 @@ resource "aws_api_gateway_stage" "this" {
   count                = local.enabled ? 1 : 0
   deployment_id        = aws_api_gateway_deployment.this[0].id
   rest_api_id          = aws_api_gateway_rest_api.this[0].id
-  stage_name           = module.this.stage
+  stage_name           = var.stage_name != "" ? var.stage_name : module.this.stage
   xray_tracing_enabled = var.xray_tracing_enabled
   tags                 = module.this.tags
+
+  variables = {
+    vpc_link_id = local.vpc_link_enabled ? aws_api_gateway_vpc_link.this[0].id : null
+  }
 
   dynamic "access_log_settings" {
     for_each = local.create_log_group ? [1] : []
@@ -76,7 +84,6 @@ resource "aws_api_gateway_method_settings" "all" {
   }
 }
 
-
 resource "aws_api_gateway_gateway_response" "default" {
   for_each            = length(var.gateway_responses) > 0 ? { for s in var.gateway_responses : s.response_type => s } : {}
   rest_api_id         = var.existing_api_gateway_rest_api != "" ? var.existing_api_gateway_rest_api : aws_api_gateway_rest_api.this[0].id
@@ -84,4 +91,11 @@ resource "aws_api_gateway_gateway_response" "default" {
   response_type       = each.value.response_type
   response_templates  = length(each.value.response_templates) > 0 ? element(each.value.response_templates, 0) : {}
   response_parameters = length(each.value.response_parameters) > 0 ? element(each.value.response_parameters, 0) : {}
+
+# Optionally create a VPC Link to allow the API Gateway to communicate with private resources (e.g. ALB)
+resource "aws_api_gateway_vpc_link" "this" {
+  count       = local.vpc_link_enabled ? 1 : 0
+  name        = module.this.id
+  description = "VPC Link for ${module.this.id}"
+  target_arns = var.private_link_target_arns
 }
