@@ -100,7 +100,7 @@ resource "aws_api_gateway_model" "this" {
   description  = each.value.description
   content_type = each.value.content_type
 
-  schema = length(list(each.value.content_type)) > 0 ? each.value.content_type : <<EOF
+  schema = each.value.content_type != "" ? each.value.content_type : <<EOF
 {
   "type": "object"
 }
