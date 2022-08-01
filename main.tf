@@ -10,7 +10,6 @@ resource "aws_api_gateway_rest_api" "this" {
   count = local.enabled ? 1 : 0
 
   name = module.this.id
-  body = jsonencode(var.openapi_config)
   tags = module.this.tags
 
   endpoint_configuration {
@@ -82,7 +81,7 @@ resource "aws_api_gateway_stage" "this" {
 
 # Set the logging, metrics and tracing levels for all methods
 resource "aws_api_gateway_method_settings" "all" {
-  count       = local.enabled  ? 1 : 0
+  count       = local.enabled ? 1 : 0
   rest_api_id = aws_api_gateway_rest_api.this[0].id
   stage_name  = aws_api_gateway_stage.this[0].stage_name
   method_path = "*/*"
