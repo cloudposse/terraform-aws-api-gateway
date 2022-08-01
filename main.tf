@@ -18,6 +18,14 @@ resource "aws_api_gateway_rest_api" "this" {
   }
 }
 
+resource "aws_api_gateway_resource" "default" {
+  count = length(var.path_parts) > 0 ? length(var.path_parts) : 0
+
+  rest_api_id = aws_api_gateway_rest_api.default.*.id[0]
+  parent_id   = aws_api_gateway_rest_api.default.*.root_resource_id[0]
+  path_part   = element(var.path_parts, count.index)
+}
+
 resource "aws_api_gateway_rest_api_policy" "this" {
   count       = local.create_rest_api_policy ? 1 : 0
   rest_api_id = var.existing_api_gateway_rest_api != "" ? var.existing_api_gateway_rest_api : aws_api_gateway_rest_api.this[0].id
@@ -50,7 +58,7 @@ resource "aws_api_gateway_deployment" "this" {
 }
 
 resource "aws_api_gateway_stage" "this" {
-  count                = local.enabled ? 1 : 0
+  count                = local.enabled && var.stage_name != "" ? 1 : 0
   deployment_id        = aws_api_gateway_deployment.this[0].id
   rest_api_id          = aws_api_gateway_rest_api.this[0].id
   stage_name           = var.stage_name != "" ? var.stage_name : module.this.stage
@@ -84,17 +92,32 @@ resource "aws_api_gateway_method_settings" "all" {
   }
 }
 
+resource "aws_api_gateway_model" "default" {
+  for_each     = local.enabled && var.models > 0 ? { for s in var.models : s.name => s } : {}
+  rest_api_id  = aws_api_gateway_rest_api.default.*.id[0]
+  name         = each.value.name
+  description  = each.value.description
+  content_type = each.value.content_type
+
+  schema = length(list(each.value.content_type)) > 0 ? each.value.content_type : <<EOF
+{
+  "type": "object"
+}
+EOF
+}
+
 resource "aws_api_gateway_gateway_response" "default" {
-  for_each            = length(var.gateway_responses) > 0 ? { for s in var.gateway_responses : s.response_type => s } : {}
+  for_each            = local.enabled && length(var.gateway_responses) > 0 ? { for s in var.gateway_responses : s.response_type => s } : {}
   rest_api_id         = var.existing_api_gateway_rest_api != "" ? var.existing_api_gateway_rest_api : aws_api_gateway_rest_api.this[0].id
   status_code         = each.value.status_code
   response_type       = each.value.response_type
   response_templates  = length(each.value.response_templates) > 0 ? element(each.value.response_templates, 0) : {}
   response_parameters = length(each.value.response_parameters) > 0 ? element(each.value.response_parameters, 0) : {}
+}
 
 # Optionally create a VPC Link to allow the API Gateway to communicate with private resources (e.g. ALB)
 resource "aws_api_gateway_vpc_link" "this" {
-  count       = local.vpc_link_enabled ? 1 : 0
+  count       = local.enabled && local.vpc_link_enabled ? 1 : 0
   name        = module.this.id
   description = "VPC Link for ${module.this.id}"
   target_arns = var.private_link_target_arns

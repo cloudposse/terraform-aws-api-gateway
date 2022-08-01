@@ -94,6 +94,17 @@ variable "gateway_responses" {
   }))
 }
 
+variable "models" {
+  description = "(Optional) - A list of objects that contain the desired Models for a REST API Gateway."
+  type = list(object({
+    name                = string
+    description         = optional(string)
+    content_type        = optional(string)
+    response_parameters = optional(string)
+  }))
+}
+
+
 variable "private_link_target_arns" {
   type        = list(string)
   description = "A list of target ARNs for VPC Private Link"
