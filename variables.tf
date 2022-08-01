@@ -103,7 +103,7 @@ variable "gateway_responses" {
 variable "models" {
   description = "(Optional) - A list of objects that contain the desired Models for a REST API Gateway."
   type = list(object({
-    name                = string
+    name                = optional(string)
     description         = optional(string)
     content_type        = optional(string)
     response_parameters = optional(string)
