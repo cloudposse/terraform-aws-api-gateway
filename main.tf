@@ -22,7 +22,7 @@ resource "aws_api_gateway_resource" "this" {
 
   rest_api_id = aws_api_gateway_rest_api.this.*.id[0]
   parent_id   = aws_api_gateway_rest_api.this.*.root_resource_id[0]
-  path_part   = element(formatlist("/%s", var.path_parts), count.index)
+  path_part   = element(var.path_parts, count.index)
 }
 
 resource "aws_api_gateway_rest_api_policy" "this" {
