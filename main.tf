@@ -23,7 +23,7 @@ resource "aws_api_gateway_resource" "this" {
 
   rest_api_id = aws_api_gateway_rest_api.this.*.id[0]
   parent_id   = aws_api_gateway_rest_api.this.*.root_resource_id[0]
-  path_part   = element(var.path_parts, count.index)
+  path_part   = element(formatlist("/%s", var.path_parts), count.index)
 }
 
 resource "aws_api_gateway_rest_api_policy" "this" {
@@ -93,9 +93,9 @@ resource "aws_api_gateway_method_settings" "all" {
   }
 }
 
-resource "aws_api_gateway_model" "default" {
+resource "aws_api_gateway_model" "this" {
   for_each     = local.enabled && var.models > 0 ? { for s in var.models : s.name => s } : {}
-  rest_api_id  = aws_api_gateway_rest_api.default.*.id[0]
+  rest_api_id  = aws_api_gateway_rest_api.this.*.id[0]
   name         = each.value.name
   description  = each.value.description
   content_type = each.value.content_type
@@ -107,7 +107,7 @@ resource "aws_api_gateway_model" "default" {
 EOF
 }
 
-resource "aws_api_gateway_gateway_response" "default" {
+resource "aws_api_gateway_gateway_response" "this" {
   for_each            = local.enabled && length(var.gateway_responses) > 0 ? { for s in var.gateway_responses : s.response_type => s } : {}
   rest_api_id         = var.existing_api_gateway_rest_api != "" ? var.existing_api_gateway_rest_api : aws_api_gateway_rest_api.this[0].id
   status_code         = each.value.status_code
