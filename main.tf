@@ -34,7 +34,7 @@ resource "aws_api_gateway_rest_api_policy" "this" {
 }
 
 module "cloudwatch_log_group" {
-  count   = local.enabled && create_log_group ? 1 : 0
+  count   = local.enabled && local.create_log_group ? 1 : 0
   source  = "cloudposse/cloudwatch-logs/aws"
   version = "0.6.5"
 
