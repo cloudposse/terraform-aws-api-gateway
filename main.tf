@@ -18,22 +18,23 @@ resource "aws_api_gateway_rest_api" "this" {
   }
 }
 
-resource "aws_api_gateway_resource" "default" {
-  count = length(var.path_parts) > 0 ? length(var.path_parts) : 0
+resource "aws_api_gateway_resource" "this" {
+  count = local.enabled && length(var.path_parts) > 0 ? length(var.path_parts) : 0
 
-  rest_api_id = aws_api_gateway_rest_api.default.*.id[0]
-  parent_id   = aws_api_gateway_rest_api.default.*.root_resource_id[0]
+  rest_api_id = aws_api_gateway_rest_api.this.*.id[0]
+  parent_id   = aws_api_gateway_rest_api.this.*.root_resource_id[0]
   path_part   = element(var.path_parts, count.index)
 }
 
 resource "aws_api_gateway_rest_api_policy" "this" {
-  count       = local.create_rest_api_policy ? 1 : 0
+  count       = local.enabled && local.create_rest_api_policy ? 1 : 0
   rest_api_id = var.existing_api_gateway_rest_api != "" ? var.existing_api_gateway_rest_api : aws_api_gateway_rest_api.this[0].id
 
   policy = var.rest_api_policy
 }
 
 module "cloudwatch_log_group" {
+  count   = local.enabled && create_log_group ? 1 : 0
   source  = "cloudposse/cloudwatch-logs/aws"
   version = "0.6.5"
 

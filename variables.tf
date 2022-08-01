@@ -78,6 +78,12 @@ variable "access_log_format" {
   EOF
 }
 
+variable "path_parts" {
+  type        = list(any)
+  default     = []
+  description = "The last path segment of this API resource."
+}
+
 variable "rest_api_policy" {
   description = "The IAM policy document for the API."
   type        = string
