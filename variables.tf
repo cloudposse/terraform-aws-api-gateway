@@ -1,10 +1,5 @@
 # See https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html for additional
 # configuration information.
-variable "openapi_config" {
-  description = "The OpenAPI specification for the API"
-  type        = any
-  default     = {}
-}
 
 variable "endpoint_type" {
   type        = string
