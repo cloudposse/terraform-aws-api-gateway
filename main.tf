@@ -94,7 +94,7 @@ resource "aws_api_gateway_method_settings" "all" {
 }
 
 resource "aws_api_gateway_model" "this" {
-  for_each     = local.enabled && var.models > 0 ? { for s in var.models : s.name => s } : {}
+  for_each     = local.enabled && length(var.models) > 0 ? { for s in var.models : s.name => s } : {}
   rest_api_id  = aws_api_gateway_rest_api.this.*.id[0]
   name         = each.value.name
   description  = each.value.description
