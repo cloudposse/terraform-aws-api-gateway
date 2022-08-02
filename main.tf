@@ -47,6 +47,10 @@ module "cloudwatch_log_group" {
 resource "aws_api_gateway_deployment" "this" {
   count       = local.enabled ? 1 : 0
   rest_api_id = aws_api_gateway_rest_api.this[0].id
+  depends_on = [
+    aws_api_gateway_method.null,
+    aws_api_gateway_integration.null
+  ]
 
   triggers = {
     redeployment = sha1(jsonencode(aws_api_gateway_rest_api.this[0].body))
