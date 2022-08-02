@@ -44,6 +44,19 @@ module "cloudwatch_log_group" {
   context = module.this.context
 }
 
+resource "aws_api_gateway_deployment" "this" {
+  count       = local.enabled ? 1 : 0
+  rest_api_id = aws_api_gateway_rest_api.this[0].id
+
+  triggers = {
+    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.this[0].body))
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 resource "aws_api_gateway_stage" "this" {
   count                = local.enabled ? 1 : 0
   deployment_id        = aws_api_gateway_deployment.this[0].id
