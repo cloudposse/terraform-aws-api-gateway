@@ -44,19 +44,6 @@ module "cloudwatch_log_group" {
   context = module.this.context
 }
 
-resource "aws_api_gateway_deployment" "this" {
-  count       = local.enabled ? 1 : 0
-  rest_api_id = aws_api_gateway_rest_api.this[0].id
-
-  triggers = {
-    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.this[0].body))
-  }
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
 resource "aws_api_gateway_stage" "this" {
   count                = local.enabled ? 1 : 0
   deployment_id        = aws_api_gateway_deployment.this[0].id
@@ -90,13 +77,6 @@ resource "aws_api_gateway_method_settings" "all" {
     metrics_enabled = var.metrics_enabled
     logging_level   = var.logging_level
   }
-}
-
-resource "aws_api_gateway_method" "default" {
-  rest_api_id   = aws_api_gateway_rest_api.this[0].id
-  resource_id   = aws_api_gateway_rest_api.this[0].root_resource_id
-  http_method   = "GET"
-  authorization = "NONE"
 }
 
 resource "aws_api_gateway_model" "this" {
