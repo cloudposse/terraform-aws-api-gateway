@@ -13,7 +13,7 @@ resource "aws_api_gateway_method" "null" {
   authorization = "NONE"
 }
 
-resource "aws_api_gateway_integration" "mock" {
+resource "aws_api_gateway_integration" "null" {
   count       = local.enabled ? 1 : 0
   rest_api_id = aws_api_gateway_rest_api.this[0].id
   resource_id = aws_api_gateway_resource.null[0].id
