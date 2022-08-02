@@ -93,8 +93,8 @@ resource "aws_api_gateway_method_settings" "all" {
 }
 
 resource "aws_api_gateway_method" "default" {
-  rest_api_id   = aws_api_gateway_rest_api.this.id
-  resource_id   = aws_api_gateway_rest_api.this.root_resource_id
+  rest_api_id   = aws_api_gateway_rest_api.this[0].id
+  resource_id   = aws_api_gateway_rest_api.this[0].root_resource_id
   http_method   = "GET"
   authorization = "NONE"
 }
