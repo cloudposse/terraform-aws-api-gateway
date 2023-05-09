@@ -4,6 +4,7 @@ locals {
   create_log_group       = local.enabled && var.logging_level != "OFF"
   log_group_arn          = local.create_log_group ? module.cloudwatch_log_group.log_group_arn : null
   vpc_link_enabled       = local.enabled && length(var.private_link_target_arns) > 0
+    
 }
 
 resource "aws_api_gateway_rest_api" "this" {
