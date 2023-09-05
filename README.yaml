@@ -94,7 +94,7 @@ usage: |-
   Setup the account-level settings for logging and metrics for API Gateway:
 
   ```hcl
-  module "api_gateway_account_settgings" {
+  module "api_gateway_account_settings" {
     source  = "cloudposse/api-gateway/aws//modules/account-settings"
     # version = "x.x.x"
 
