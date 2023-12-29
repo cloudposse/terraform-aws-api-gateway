@@ -43,7 +43,7 @@ related:
 
 # Short description of this project
 description: |-
-  Terraform module to provision API Gatway resources.
+  Terraform module to provision API Gateway resources.
 
   The root module creates an API Gateway [REST API](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-rest-api.html) 
   along with configuring tracing, logging, and metrics.
