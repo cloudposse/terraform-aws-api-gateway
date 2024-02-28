@@ -40,6 +40,12 @@ variable "xray_tracing_enabled" {
   default     = false
 }
 
+variable "data_trace_enabled" {
+  description = "Whether data trace logging is enabled for this method, which effects the log entries pushed to Amazon CloudWatch Logs."
+  type        = bool
+  default     = false
+}
+
 # See https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-logging.html for additional information
 # on how to configure logging.
 variable "access_log_format" {
