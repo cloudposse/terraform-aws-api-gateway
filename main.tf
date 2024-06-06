@@ -41,7 +41,10 @@ resource "aws_api_gateway_deployment" "this" {
   rest_api_id = aws_api_gateway_rest_api.this[0].id
 
   triggers = {
-    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.this[0].body))
+    redeployment = sha1(jsonencode([
+      aws_api_gateway_rest_api.this[0].body,
+      local.create_rest_api_policy ? var.rest_api_policy : ""
+    ]))
   }
 
   lifecycle {
