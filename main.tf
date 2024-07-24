@@ -13,6 +13,8 @@ resource "aws_api_gateway_rest_api" "this" {
   body = jsonencode(var.openapi_config)
   tags = module.this.tags
 
+  minimum_compression_size = var.minimum_compression_size
+
   endpoint_configuration {
     types = [var.endpoint_type]
   }
