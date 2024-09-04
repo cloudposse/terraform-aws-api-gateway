@@ -39,5 +39,5 @@ output "stage_arn" {
 
 output "log_group_name" {
   description = "The ARN of the Cloudwatch log group"
-  value       = local.log_group_name
+  value       = local.create_log_group ? module.cloudwatch_log_group.log_group_name : null
 }
