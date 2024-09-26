@@ -18,9 +18,9 @@ variable "endpoint_type" {
 }
 
 variable "vpc_endpoints" {
-  type    = list(string)
+  type        = list(string)
   description = "List of VPC Endpoint IDs to attach to the API Gateway"
-  default = []
+  default     = []
 }
 
 variable "logging_level" {

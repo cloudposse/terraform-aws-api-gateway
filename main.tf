@@ -14,7 +14,7 @@ resource "aws_api_gateway_rest_api" "this" {
   tags = module.this.tags
 
   endpoint_configuration {
-    types = [var.endpoint_type]
+    types            = [var.endpoint_type]
     vpc_endpoint_ids = var.vpc_endpoints
   }
 }
