@@ -36,3 +36,8 @@ output "stage_arn" {
   description = "The ARN of the gateway stage"
   value       = module.this.enabled ? aws_api_gateway_stage.this[0].arn : null
 }
+
+output "log_group_name" {
+  description = "The ARN of the Cloudwatch log group"
+  value       = local.create_log_group ? module.cloudwatch_log_group.log_group_name : null
+}
