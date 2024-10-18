@@ -19,11 +19,38 @@ resource "aws_api_gateway_rest_api" "this" {
   }
 }
 
+data "aws_iam_policy_document" "default" {
+  count = local.enabled && length(var.vpc_endpoints) > 0 ? 1 : 0
+
+  source_policy_documents = var.rest_api_policy == null ? [] : [var.rest_api_policy]
+
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "execute-api:Invoke"
+    ]
+
+    resources = aws_api_gateway_rest_api.this[*].execution_arn
+
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "aws:sourceVpce"
+      values   = var.vpc_endpoints
+    }
+  }
+}
+
 resource "aws_api_gateway_rest_api_policy" "this" {
-  count       = local.create_rest_api_policy ? 1 : 0
+  count       = local.create_rest_api_policy || length(var.vpc_endpoints) > 0 ? 1 : 0
   rest_api_id = aws_api_gateway_rest_api.this[0].id
 
-  policy = var.rest_api_policy
+  policy = data.aws_iam_policy_document.default[0].json
 }
 
 module "cloudwatch_log_group" {
