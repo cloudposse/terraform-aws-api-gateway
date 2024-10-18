@@ -19,7 +19,7 @@ resource "aws_api_gateway_rest_api" "this" {
   }
 }
 
-data "aws_iam_policy_document" "default" {
+data "aws_iam_policy_document" "this" {
   count = local.enabled && length(var.vpc_endpoints) > 0 ? 1 : 0
 
   source_policy_documents = var.rest_api_policy == null ? [] : [var.rest_api_policy]
@@ -50,7 +50,7 @@ resource "aws_api_gateway_rest_api_policy" "this" {
   count       = local.create_rest_api_policy || length(var.vpc_endpoints) > 0 ? 1 : 0
   rest_api_id = aws_api_gateway_rest_api.this[0].id
 
-  policy = data.aws_iam_policy_document.default[0].json
+  policy = data.aws_iam_policy_document.this[0].json
 }
 
 module "cloudwatch_log_group" {
