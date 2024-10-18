@@ -165,7 +165,7 @@ Available targets:
 | <a name="input_stage_name"></a> [stage\_name](#input\_stage\_name) | The name of the stage | `string` | `""` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`).<br/>Neither the tag keys nor the tag values will be modified by this module. | `map(string)` | `{}` | no |
 | <a name="input_tenant"></a> [tenant](#input\_tenant) | ID element \_(Rarely used, not included by default)\_. A customer identifier, indicating who this instance of a resource is for | `string` | `null` | no |
-| <a name="input_vpc_endpoints"></a> [vpc\_endpoints](#input\_vpc\_endpoints) | List of VPC Endpoint IDs to attach to the API Gateway | `list(string)` | `null` | no |
+| <a name="input_vpc_endpoints"></a> [vpc\_endpoints](#input\_vpc\_endpoints) | List of VPC Endpoint IDs to attach to the API Gateway | `list(string)` | `[]` | no |
 | <a name="input_xray_tracing_enabled"></a> [xray\_tracing\_enabled](#input\_xray\_tracing\_enabled) | A flag to indicate whether to enable X-Ray tracing. | `bool` | `false` | no |
 
 ## Outputs
