@@ -1,7 +1,7 @@
 locals {
   enabled                = module.this.enabled
   create_rest_api_policy = local.enabled && var.rest_api_policy != null
-  create_log_group       = local.enabled && var.logging_level != "OFF"
+  create_log_group       = local.enabled && var.logging_level != "OFF" && var.access_log_enabled
   log_group_arn          = local.create_log_group ? module.cloudwatch_log_group.log_group_arn : null
   vpc_link_enabled       = local.enabled && length(var.private_link_target_arns) > 0
 }

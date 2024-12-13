@@ -52,6 +52,12 @@ variable "data_trace_enabled" {
   default     = false
 }
 
+variable "access_log_enabled" {
+  description = "Whether access logs are enabled."
+  type        = bool
+  default     = true
+}
+
 # See https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-logging.html for additional information
 # on how to configure logging.
 variable "access_log_format" {
