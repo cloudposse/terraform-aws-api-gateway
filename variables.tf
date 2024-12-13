@@ -139,3 +139,9 @@ variable "stage_name" {
   default     = ""
   description = "The name of the stage"
 }
+
+variable "retention_in_days" {
+  type        = string
+  description = "Number of days you want to retain log events in the API Gateway log group"
+  default     = "30"
+}
