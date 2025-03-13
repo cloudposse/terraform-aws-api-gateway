@@ -139,3 +139,15 @@ variable "stage_name" {
   default     = ""
   description = "The name of the stage"
 }
+
+variable "throttling_burst_limit" {
+  description = "The API request burst limit"
+  type        = number
+  default     = -1
+}
+
+variable "throttling_rate_limit" {
+  description = "The API request rate limit"
+  type        = number
+  default     = -1
+}
