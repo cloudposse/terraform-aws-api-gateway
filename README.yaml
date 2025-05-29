@@ -35,7 +35,7 @@ badges:
     url: https://github.com/cloudposse/terraform-aws-api-gateway/commits
   - name: Slack Community
     image: https://slack.cloudposse.com/for-the-badge.svg
-    url: https://slack.cloudposse.com
+    url: https://cloudposse.com/slack
 
 # List any related terraform modules that this module may be used with or that this module depends on.
 related:
@@ -99,9 +99,5 @@ usage: |2-
 examples: |-
   Review the [examples](examples) folder to see how to use the API Gateway modules.
 
-include:
-  - "docs/targets.md"
-  - "docs/terraform.md"
-
-# Contributors to this project
+include: []
 contributors: []
