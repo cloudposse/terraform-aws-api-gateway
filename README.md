@@ -3,7 +3,7 @@
 <!-- markdownlint-disable -->
 <a href="https://cpco.io/homepage"><img src="https://github.com/cloudposse/terraform-aws-api-gateway/blob/main/.github/banner.png?raw=true" alt="Project Banner"/></a><br/>
     <p align="right">
-<a href="https://github.com/cloudposse/terraform-aws-api-gateway/releases/latest"><img src="https://img.shields.io/github/release/cloudposse/terraform-aws-api-gateway.svg?style=for-the-badge" alt="Latest Release"/></a><a href="https://github.com/cloudposse/terraform-aws-api-gateway/commits"><img src="https://img.shields.io/github/last-commit/cloudposse/terraform-aws-api-gateway.svg?style=for-the-badge" alt="Last Updated"/></a><a href="https://slack.cloudposse.com"><img src="https://slack.cloudposse.com/for-the-badge.svg" alt="Slack Community"/></a></p>
+<a href="https://github.com/cloudposse/terraform-aws-api-gateway/releases/latest"><img src="https://img.shields.io/github/release/cloudposse/terraform-aws-api-gateway.svg?style=for-the-badge" alt="Latest Release"/></a><a href="https://github.com/cloudposse/terraform-aws-api-gateway/commits"><img src="https://img.shields.io/github/last-commit/cloudposse/terraform-aws-api-gateway.svg?style=for-the-badge" alt="Last Updated"/></a><a href="https://cloudposse.com/slack"><img src="https://slack.cloudposse.com/for-the-badge.svg" alt="Slack Community"/></a></p>
 <!-- markdownlint-restore -->
 
 <!--
@@ -58,7 +58,6 @@ A set of modules for configuring an API Gateway
 
 ## Usage
 
-
 Setup the account-level settings for logging and metrics for API Gateway:
 
 ```hcl
@@ -87,18 +86,6 @@ Review the [examples](examples) folder to see how to use the API Gateway modules
 
 
 
-<!-- markdownlint-disable -->
-## Makefile Targets
-```text
-Available targets:
-
-  help                                Help screen
-  help/all                            Display help for all targets
-  help/short                          This help short screen
-  lint                                Lint terraform code
-
-```
-<!-- markdownlint-restore -->
 <!-- markdownlint-disable -->
 ## Requirements
 
@@ -182,6 +169,11 @@ Available targets:
 | <a name="output_root_resource_id"></a> [root\_resource\_id](#output\_root\_resource\_id) | The resource ID of the REST API's root |
 | <a name="output_stage_arn"></a> [stage\_arn](#output\_stage\_arn) | The ARN of the gateway stage |
 <!-- markdownlint-restore -->
+
+
+
+
+
 
 
 ## Related Projects
