@@ -17,6 +17,12 @@ variable "endpoint_type" {
   }
 }
 
+variable "vpc_endpoints" {
+  type        = list(string)
+  description = "List of VPC Endpoint IDs to attach to the API Gateway"
+  default     = null
+}
+
 variable "logging_level" {
   type        = string
   description = "The logging level of the API. One of - OFF, INFO, ERROR"
@@ -36,6 +42,12 @@ variable "metrics_enabled" {
 
 variable "xray_tracing_enabled" {
   description = "A flag to indicate whether to enable X-Ray tracing."
+  type        = bool
+  default     = false
+}
+
+variable "data_trace_enabled" {
+  description = "Whether data trace logging is enabled for this method, which effects the log entries pushed to Amazon CloudWatch Logs."
   type        = bool
   default     = false
 }
@@ -126,4 +138,16 @@ variable "stage_name" {
   type        = string
   default     = ""
   description = "The name of the stage"
+}
+
+variable "throttling_burst_limit" {
+  description = "The API request burst limit"
+  type        = number
+  default     = -1
+}
+
+variable "throttling_rate_limit" {
+  description = "The API request rate limit"
+  type        = number
+  default     = -1
 }

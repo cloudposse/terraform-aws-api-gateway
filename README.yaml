@@ -1,4 +1,3 @@
----
 #
 # This is the canonical configuration for the `README.md`
 # Run `make readme` to rebuild the `README.md`
@@ -28,17 +27,20 @@ github_repo: cloudposse/terraform-aws-api-gateway
 
 # Badges to display
 badges:
-  - name: "Latest Release"
-    image: "https://img.shields.io/github/release/cloudposse/terraform-aws-api-gateway.svg"
-    url: "https://github.com/cloudposse/terraform-aws-api-gateway/releases/latest"
-  - name: "Slack Community"
-    image: "https://slack.cloudposse.com/badge.svg"
-    url: "https://slack.cloudposse.com"
+  - name: Latest Release
+    image: https://img.shields.io/github/release/cloudposse/terraform-aws-api-gateway.svg?style=for-the-badge
+    url: https://github.com/cloudposse/terraform-aws-api-gateway/releases/latest
+  - name: Last Updated
+    image: https://img.shields.io/github/last-commit/cloudposse/terraform-aws-api-gateway.svg?style=for-the-badge
+    url: https://github.com/cloudposse/terraform-aws-api-gateway/commits
+  - name: Slack Community
+    image: https://slack.cloudposse.com/for-the-badge.svg
+    url: https://cloudposse.com/slack
 
+# List any related terraform modules that this module may be used with or that this module depends on.
 related:
   - name: "terraform-yaml-config"
-    description:
-      "Terraform module to convert local and remote YAML configuration templates into Terraform lists and maps"
+    description: "Terraform module to convert local and remote YAML configuration templates into Terraform lists and maps"
     url: "https://github.com/cloudposse/terraform-yaml-config"
 
 # Short description of this project
@@ -57,9 +59,7 @@ introduction: |-
 
 references:
   - name: "API Gateway CloudWatch Logging"
-    description:
-      "To enable CloudWatch Logs, you must grant API Gateway permission to read and write logs to CloudWatch for your
-      account."
+    description: "To enable CloudWatch Logs, you must grant API Gateway permission to read and write logs to CloudWatch for your account."
     url: "https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-logging.html"
 
   - name: "Create a monitor"
@@ -71,25 +71,19 @@ references:
     url: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/role"
 
   - name: "Datadog permissions"
-    description:
-      "Use this data source to retrieve the list of Datadog permissions by name and their corresponding ID, for use in
-      the role resource"
+    description: "Use this data source to retrieve the list of Datadog permissions by name and their corresponding ID, for use in the role resource"
     url: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/data-sources/permissions"
 
   - name: "Role Based Access Control"
-    description:
-      "Roles categorize users and define what account permissions those users have, such as what data they can read or
-      what account assets they can modify"
+    description: "Roles categorize users and define what account permissions those users have, such as what data they can read or what account assets they can modify"
     url: "https://docs.datadoghq.com/account_management/rbac"
 
   - name: "Managing Multiple-Organization Accounts"
-    description:
-      "It is possible to manage multiple child-organizations from one parent-organization account. This is typically
-      used by Managed Service Providers that have customers which should not have access to each others' data"
+    description: "It is possible to manage multiple child-organizations from one parent-organization account. This is typically used by Managed Service Providers that have customers which should not have access to each others' data"
     url: "https://docs.datadoghq.com/account_management/multi_organization"
 
 # How to use this project
-usage: |-
+usage: |2-
 
   Setup the account-level settings for logging and metrics for API Gateway:
 
@@ -105,11 +99,5 @@ usage: |-
 examples: |-
   Review the [examples](examples) folder to see how to use the API Gateway modules.
 
-include:
-  - "docs/targets.md"
-  - "docs/terraform.md"
-
-# Contributors to this project
-contributors:
-  - name: "Matt Calhoun"
-    github: "mcalhoun"
+include: []
+contributors: []
