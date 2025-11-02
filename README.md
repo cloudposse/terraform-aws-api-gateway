@@ -30,7 +30,7 @@
 
 -->
 
-Terraform module to provision API Gatway resources.
+Terraform module to provision API Gateway resources.
 
 The root module creates an API Gateway [REST API](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-rest-api.html) 
 along with configuring tracing, logging, and metrics.
@@ -60,6 +60,7 @@ A set of modules for configuring an API Gateway
 
 
 ## Usage
+
 
 Setup the account-level settings for logging and metrics for API Gateway:
 
