@@ -151,3 +151,11 @@ variable "throttling_rate_limit" {
   type        = number
   default     = -1
 }
+
+variable "cloudwatch_log_group_principals" {
+  description = "Map of service principals allowed to assume the CloudWatch Logs IAM role. Defaults to apigateway.amazonaws.com to fix the incorrect ec2.amazonaws.com default from the cloudwatch-logs module."
+  type        = map(list(string))
+  default = {
+    Service = ["apigateway.amazonaws.com"]
+  }
+}
