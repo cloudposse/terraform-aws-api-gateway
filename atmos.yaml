@@ -10,3 +10,64 @@
 # Import shared configuration used by all modules
 import:
   - https://raw.githubusercontent.com/cloudposse/.github/refs/heads/main/.github/atmos/terraform-module.yaml
+
+docs:
+  generate:
+    readme-submodule:
+      base-dir: ./
+      input:
+        - readme: "./modules/account-settings/README.md"
+        - get_support: true
+      template: "https://raw.githubusercontent.com/cloudposse/.github/refs/heads/main/atmos.README.md.submodule.gotmpl"
+      output: "./modules/account-settings/README.md"
+      terraform:
+        source: ./modules/account-settings
+        enabled: true
+        format: "markdown table"
+        show_providers: false
+        show_inputs: true
+        show_outputs: true
+        sort_by: "name"
+        hide_empty: false
+        indent_level: 2
+
+commands:
+- name: readme
+  steps:
+    - "atmos docs generate readme"
+    - "atmos docs generate readme-submodule"
+
+- name: test
+  commands:
+  - name: "deploy"
+    description: Deploy
+    commands:
+      - name: "dependencies"
+        description: Deploy dependencies only
+        steps:
+          - "cd test"
+          - "go test -timeout 1h --only-deploy-dependencies --skip-destroy-dependencies"
+
+      - name: "component"
+        description: Deploy component only
+        steps:
+          - "cd test"
+          - "go test -timeout 1h --skip-deploy-dependencies --skip-destroy-dependencies --skip-destroy-component"
+
+  - name: "assert"
+    description: Run asserts
+    steps:
+      - "cd test"
+      - "go test -timeout 1h --skip-deploy-dependencies --skip-destroy-dependencies --skip-deploy-component --skip-destroy-component"
+
+  - name: "destroy"
+    description: Destroy
+    steps:
+      - "cd test"
+      - "go test -timeout 1h --skip-deploy-dependencies --skip-deploy-component"
+
+  - name: "run"
+    description: Run tests
+    steps:
+      - "cd test"
+      - "go test -timeout 1h"
