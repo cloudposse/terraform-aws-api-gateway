@@ -39,35 +39,20 @@ commands:
 
 - name: test
   commands:
-  - name: "deploy"
-    description: Deploy
-    commands:
-      - name: "dependencies"
-        description: Deploy dependencies only
-        steps:
-          - "cd test"
-          - "go test -timeout 1h --only-deploy-dependencies --skip-destroy-dependencies"
-
-      - name: "component"
-        description: Deploy component only
-        steps:
-          - "cd test"
-          - "go test -timeout 1h --skip-deploy-dependencies --skip-destroy-dependencies --skip-destroy-component"
-
-  - name: "assert"
-    description: Run asserts
+  - name: "init"
+    description: Initialize tests
     steps:
-      - "cd test"
-      - "go test -timeout 1h --skip-deploy-dependencies --skip-destroy-dependencies --skip-deploy-component --skip-destroy-component"
-
-  - name: "destroy"
-    description: Destroy
-    steps:
-      - "cd test"
-      - "go test -timeout 1h --skip-deploy-dependencies --skip-deploy-component"
+      - "make -C test/src init"
 
   - name: "run"
     description: Run tests
     steps:
-      - "cd test"
-      - "go test -timeout 1h"
+      - "cd test/src && go mod tidy"
+      - "cd test/src && go test -v -timeout 60m"
+
+  - name: "clean"
+    description: Clean tests
+    steps:
+      - "make -C test/src clean"
+      - "rm -rf examples/*/.terraform examples/*/.terraform.lock.hcl"
+
