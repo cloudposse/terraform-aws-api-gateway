@@ -33,6 +33,7 @@ module "cloudwatch_log_group" {
   enabled              = local.create_log_group
   iam_tags_enabled     = var.iam_tags_enabled
   permissions_boundary = var.permissions_boundary
+  principals           = var.cloudwatch_log_group_principals
 
   context = module.this.context
 }
