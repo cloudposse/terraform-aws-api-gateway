@@ -34,6 +34,12 @@ variable "logging_level" {
   }
 }
 
+variable "retention_in_days" {
+  type        = string
+  default     = "30"
+  description = "The number of days to retain logs for the API"
+}
+
 variable "metrics_enabled" {
   description = "A flag to indicate whether to enable metrics collection."
   type        = bool
