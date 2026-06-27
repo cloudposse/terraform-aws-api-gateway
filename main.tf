@@ -28,11 +28,13 @@ resource "aws_api_gateway_rest_api_policy" "this" {
 
 module "cloudwatch_log_group" {
   source  = "cloudposse/cloudwatch-logs/aws"
-  version = "0.6.8"
+  version = "0.6.9"
 
   enabled              = local.create_log_group
   iam_tags_enabled     = var.iam_tags_enabled
   permissions_boundary = var.permissions_boundary
+
+  retention_in_days = var.retention_in_days
 
   context = module.this.context
 }
