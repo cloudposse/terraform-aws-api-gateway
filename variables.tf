@@ -17,6 +17,17 @@ variable "endpoint_type" {
   }
 }
 
+variable "ip_address_type" {
+  type        = string
+  description = "The type of IP address to use for the API. One of - IPV4, IPV6, DUALSTACK"
+  default     = "dualstack"
+
+  validation {
+    condition     = contains(["ipv4", "ipv6", "dualstack"], var.ip_address_type)
+    error_message = "Valid values for var: ip_address_type are (ipv4, ipv6, dualstack)."
+  }
+}
+
 variable "vpc_endpoints" {
   type        = list(string)
   description = "List of VPC Endpoint IDs to attach to the API Gateway"
